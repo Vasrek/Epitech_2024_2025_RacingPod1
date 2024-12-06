@@ -1,8 +1,8 @@
 #include "BasePawn.h"
-
 #include "EnhancedInputSubsystems.h"
 #include "Components/BoxComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "Projectile.h"
 
 ABasePawn::ABasePawn()
 {
@@ -58,16 +58,26 @@ void ABasePawn::RotateTurret(FVector LookAtTarget)
 void ABasePawn::Fire()
 {
 	FVector ProjectileSpawnPointLocation = ProjectileSpawnPoint->GetComponentLocation();
+	FRotator ProjectileSpawnPointRotation = ProjectileSpawnPoint->GetComponentRotation();
+	FVector Scale = ProjectileScale;
+	FTransform SpawnProjectileTransform(ProjectileSpawnPointRotation, ProjectileSpawnPointLocation, Scale);
 
-	DrawDebugSphere(
-		GetWorld(),
-		ProjectileSpawnPointLocation,
-		25.f,
-		12,
-		FColor::Red,
-		false,
-		3.f
-	);
+	if (ProjectileClass != nullptr)
+	{
+		GetWorld()->SpawnActor<AProjectile>(ProjectileClass, SpawnProjectileTransform);
+	}
+	
+
+	// DrawDebugSphere(
+	// 	GetWorld(),
+	// 	ProjectileSpawnPointLocation,
+	// 	25.f,
+	// 	12,
+	// 	FColor::Red,
+	// 	false,
+	// 	3.f
+	// );
+
 	
 }
 

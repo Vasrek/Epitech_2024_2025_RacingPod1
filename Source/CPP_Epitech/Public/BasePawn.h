@@ -8,6 +8,7 @@
 #include "BasePawn.generated.h"
 
 class UBoxComponent;
+class AProjectile;
 
 UCLASS()
 class CPP_EPITECH_API ABasePawn : public APawn
@@ -42,5 +43,11 @@ private:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	USceneComponent* ProjectileSpawnPoint;
+
+	UPROPERTY(EditAnywhere, Category = "Combat Properties")
+	TSubclassOf<AProjectile> ProjectileClass;
+
+	UPROPERTY(EditAnywhere, Category = "Combat Properties")
+	FVector ProjectileScale = FVector(2.0f, 2.0f, 2.0f);
 	
 };
