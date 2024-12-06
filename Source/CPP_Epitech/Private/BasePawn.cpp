@@ -3,6 +3,7 @@
 #include "Components/BoxComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Projectile.h"
+#include "Sound/SoundCue.h"
 
 ABasePawn::ABasePawn()
 {
@@ -66,6 +67,15 @@ void ABasePawn::Fire()
 	{
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileClass, SpawnProjectileTransform);
 		Projectile->SetOwner(this);
+
+		if (FireSFX)
+		{
+			UGameplayStatics::PlaySoundAtLocation(
+				this,
+				FireSFX,
+				GetActorLocation()
+			);
+		}
 		
 	}
 	

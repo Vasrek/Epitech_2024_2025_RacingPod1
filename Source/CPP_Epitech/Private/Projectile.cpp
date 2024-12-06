@@ -2,6 +2,7 @@
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "GameFramework/DamageType.h"
+#include "NiagaraFunctionLibrary.h"
 
 AProjectile::AProjectile()
 {
@@ -37,6 +38,12 @@ void AProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimi
 	if (OtherActor && OtherActor != this && OtherActor != MyOwner)
 	{
 		UGameplayStatics::ApplyDamage(OtherActor, Damage, MyOwnerInstigator, this, DamageTypeClass);
+		UNiagaraFunctionLibrary::SpawnSystemAtLocation(
+			this,
+			ExplosionVFX,
+			GetActorLocation(),
+			GetActorRotation()
+		);
 		Destroy();
 	}
 
