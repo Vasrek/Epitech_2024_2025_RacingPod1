@@ -22,6 +22,8 @@ public:
 	ATank();
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	virtual void Tick(float DeltaTime) override;
+
+	APlayerController* GetTankPlayerController() const { return TankPlayerController; }
 	
 protected:
 

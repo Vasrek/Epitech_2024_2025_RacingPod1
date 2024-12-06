@@ -64,7 +64,9 @@ void ABasePawn::Fire()
 
 	if (ProjectileClass != nullptr)
 	{
-		GetWorld()->SpawnActor<AProjectile>(ProjectileClass, SpawnProjectileTransform);
+		auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileClass, SpawnProjectileTransform);
+		Projectile->SetOwner(this);
+		
 	}
 	
 
@@ -78,6 +80,14 @@ void ABasePawn::Fire()
 	// 	3.f
 	// );
 
+	
+}
+
+void ABasePawn::HandleDestruction()
+{
+	UE_LOG(LogTemp, Warning, TEXT("HandleDestruction"));
+	// VFX SFX
+	Destroy();
 	
 }
 

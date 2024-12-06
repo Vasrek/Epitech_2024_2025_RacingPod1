@@ -19,6 +19,7 @@ public:
 	ABasePawn();
 	virtual void Tick(float DeltaTime) override;
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	void HandleDestruction();
 
 protected:
 	virtual void BeginPlay() override;
@@ -28,6 +29,8 @@ protected:
 	float InterpSpeed = 5.f;
 
 	void Fire();
+
+
 	
 
 private:
